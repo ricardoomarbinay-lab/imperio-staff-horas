@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMPERIO RP — Staff Horas</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">♛</div><div><strong>IMPERIO RP</strong><span>STAFF HORAS</span></div></div>
+    <nav>
+      <button class="nav-item active" data-view="dashboard">⌂ <span>Inicio</span></button>
+      <button class="nav-item" data-view="staff">♟ <span>Staff</span></button>
+      <button class="nav-item" data-view="ranks">◆ <span>Rangos</span></button>
+      <button class="nav-item" data-view="stats">▥ <span>Estadísticas</span></button>
+      <button class="nav-item" data-view="history">◷ <span>Historial</span></button>
+      <button class="nav-item" data-view="settings">⚙ <span>Configuración</span></button>
+    </nav>
+    <div id="ownerNav" class="owner-only">
+      <div class="owner-divider"></div><div class="owner-label">🔒 SOLO PARA OWNERS</div>
+      <button class="nav-item" data-view="colors">🎨 <span>Colores de rangos</span></button>
+      <button class="nav-item" data-view="permissions">◈ <span>Permisos de rangos</span></button>
+      <button class="nav-item" data-view="access">♟ <span>Editores / Viewers / Owners</span></button>
+    </div>
+    <div class="sidebar-bottom"><div class="mini-crown">♛</div><b>IMPERIO RP</b><small>Juntos hacemos la diferencia.</small></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="current-rank">♛ <span>Rango actual:</span> <b id="currentRank">OWNER</b></div>
+      <div class="top-info"><span>♟ <b id="currentUser">Matí</b> · <span id="currentRole">Owner</span></span><span>▣ Semana actual</span><span>🔒 Acceso privado</span></div>
+    </header>
+
+    <section id="dashboardView" class="view">
+      <div class="hero"><div class="hero-icon">♛</div><div><h1>Gestión de Staff</h1><p>Administrá las horas y el rendimiento del equipo de Staff de Imperio RP.</p></div><div class="hero-actions"><button id="exportBtn" class="secondary">⇩ Exportar datos</button><button id="addTopBtn" class="primary">＋ Agregar miembro</button></div></div>
+      <div class="cards">
+        <article class="card"><div class="card-icon blue">♟</div><div><span>Total de Staff</span><strong id="totalStaff">0</strong><small>miembros</small></div></article>
+        <article class="card"><div class="card-icon green">◷</div><div><span>Horas acumuladas</span><strong id="totalHours">0:00 h</strong><small>todo el Staff</small></div></article>
+        <article class="card status-card"><div><span>Estados de inactividad</span><div class="status-legend"><button class="legend inactive">● INACTIVO</button><button class="legend justified">● Inactividad justificada</button></div></div></article>
+      </div>
+      <div class="toolbar"><div class="tabs"><button class="filter active" data-filter="all">● Todos</button><button class="filter" data-filter="low">● LOW STAFF</button><button class="filter" data-filter="mid">● MID STAFF</button><button class="filter" data-filter="high">● HIGH STAFF</button></div><input id="search" class="search" placeholder="⌕  Buscar miembro..." autocomplete="off"></div>
+      <div id="groups"></div>
+    </section>
+
+    <section id="staffView" class="view hidden">
+      <div class="section-title"><div><h2>Staff</h2><p>Información y administración detallada de cada miembro.</p></div><button id="addBtn" class="primary">＋ Agregar miembro</button></div>
+      <div id="staffManager" class="manager-grid"></div>
+    </section>
+
+    <section id="ranksView" class="view hidden">
+      <div class="section-title"><div><h2>Rangos</h2><p>Jerarquía de Staff de IMPERIO RP.</p></div></div>
+      <div class="rank-columns">
+        <div class="rank-card high"><h3>HIGH STAFF</h3><div>ADM · ADM+ · ADM++</div></div>
+        <div class="rank-card mid"><h3>MID STAFF</h3><div>MOD · MOD+ · MOD++</div></div>
+        <div class="rank-card low"><h3>LOW STAFF</h3><div>SDP · SP · SE</div></div>
+      </div>
+    </section>
+
+    <section id="statsView" class="view hidden">
+      <div class="section-title"><div><h2>Estadísticas</h2><p>Horas totales de cada grupo de Staff.</p></div></div>
+      <div id="statsContent" class="stats-panel"></div>
+    </section>
+
+    <section id="historyView" class="view hidden">
+      <div class="section-title"><div><h2>Historial</h2><p>Cambios realizados durante esta sesión.</p></div></div>
+      <div id="history" class="history"></div>
+    </section>
+
+    <section id="settingsView" class="view hidden">
+      <div class="section-title"><div><h2>Configuración</h2><p>Objetivos semanales por rango.</p></div></div>
+      <div id="settingsPanel" class="settings-panel"></div>
+    </section>
+
+    <section id="colorsView" class="view hidden owner-only">
+      <div class="section-title"><div><h2>Colores de rangos</h2><p>Personalizá el color de cada rango. Solo los Owners pueden cambiarlo.</p></div></div>
+      <div id="colorsPanel" class="color-grid"></div>
+    </section>
+
+    <section id="permissionsView" class="view hidden owner-only">
+      <div class="section-title"><div><h2>Permisos de rangos</h2><p>Definí qué puede hacer cada nivel de acceso.</p></div></div>
+      <div id="permissionsPanel" class="permissions-grid"></div>
+    </section>
+
+    <section id="accessView" class="view hidden owner-only">
+      <div class="section-title"><div><h2>Editores / Viewers / Owners</h2><p>Administrá quién puede entrar y qué nivel de acceso tiene.</p></div><button id="addAccessBtn" class="primary">＋ Agregar acceso</button></div>
+      <div id="accessPanel" class="access-grid"></div>
+    </section>
+  </main>
+</div>
+
+<div id="contextMenu" class="context-menu hidden">
+  <div class="context-title">Estado del día</div>
+  <button data-status="normal">✓ Normal</button>
+  <button data-status="inactive" class="red-option">● Inactivo</button>
+  <button data-status="justified" class="yellow-option">● Inactividad justificada</button>
+</div>
+
+<div id="modal" class="modal hidden"><div class="modal-box"><button id="closeModal" class="close">×</button><h2 id="modalTitle">Agregar miembro</h2>
+<form id="staffForm"><input type="hidden" id="editId">
+<label>Nombre<input id="name" required maxlength="60" placeholder="Nombre del Staff"></label>
+<label>Rango<select id="rank"></select></label>
+<div class="modal-note">Las horas se cargan desde la tabla por día. También podés editar el total semanal desde el detalle.</div>
+<button class="primary" type="submit">Guardar cambios</button></form></div></div>
+
+<div id="accessModal" class="modal hidden"><div class="modal-box"><button id="closeAccessModal" class="close">×</button><h2>Agregar acceso</h2>
+<form id="accessForm"><label>Nombre<input id="accessName" required maxlength="60" placeholder="Nombre"></label><label>Nivel<select id="accessRole"><option>EDITOR</option><option>VIEWER</option><option>OWNER</option></select></label><label>Token de acceso<input id="accessToken" required maxlength="80" placeholder="Token único"></label><button class="primary" type="submit">Agregar acceso</button></form></div></div>
+<div id="toast"></div>
+<script src="/assets/app.js"></script>
+</body></html>
