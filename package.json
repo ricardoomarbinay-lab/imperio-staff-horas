@@ -1,0 +1,19 @@
+{
+  "name": "imperio-rp-staff-horas",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Panel privado de horas de staff para Imperio RP",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.2",
+    "helmet": "^8.1.0"
+  }
+}
